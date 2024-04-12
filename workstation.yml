@@ -1,0 +1,96 @@
+- name: Configuration de l'environnement de travail
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - wget
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+          - git
+          - virtualbox
+          - zsh
+          - build-essential
+          - vim
+        state: latest
+        update_cache: true
+    - name: Set zsh as default shell
+      ansible.builtin.user:
+        name: "{{ ansible_env.USER }}"
+        shell: /bin/zsh
+      become: yes
+    
+
+    - name: Configure Git
+      ansible.builtin.template:
+        src: templates/gitconfig.j2
+        dest: ~/.gitconfig
+      become: no
+
+     
+      become: no
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+    - name: Ajouter un utilisateur au groupe Docker
+      user:
+        name: "{{ lookup('env', 'USER') }}"
+        groups: docker
+        append: yes
+
+    - name: Télécharger le binaire Minikube
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /usr/local/bin/minikube
+        mode: '0755'
+
+    - name: Télécharger le package Vagrant
+      get_url:
+        url: "https://releases.hashicorp.com/vagrant/2.2.18/vagrant_2.2.18_x86_64.deb"
+        dest: "/tmp/vagrant_2.2.18_x86_64.deb"
+        mode: '0644'
+
+    - name: Télécharger le script d'installation de Visual Studio Code
+      get_url:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        dest: /tmp/microsoft.asc
+
+    - name: Importer la clé GPG de Microsoft
+      shell: |
+        gpg --dearmor /tmp/microsoft.asc
+        sudo mv /tmp/microsoft.asc.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+
+    - name: Ajouter le référentiel Visual Studio Code
+      apt_repository:
+        repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+        state: present
+
+    - name: Mettre à jour les informations des paquets
+      apt: 
+        update_cache: yes
+
+    - name: Installer Visual Studio Code
+      apt:
+        name: code
+        state: present
+      become: yes
