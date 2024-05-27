@@ -7,5 +7,5 @@
    `git clone https://github.com/Luthernmr/PrettyLinuxConfig.git`
 
 3. launch Ansible
-   `ansible-playbook -i inventory.ini workstation.yml`
+   `sudo ansible-playbook -i inventory.ini workstation.yml`
    
