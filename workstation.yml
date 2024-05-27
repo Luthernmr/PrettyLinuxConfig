@@ -34,8 +34,6 @@
         dest: ~/.gitconfig
       become: no
 
-     
-      become: no
     - name: Add Docker GPG apt Key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
@@ -56,7 +54,7 @@
       user:
         name: "{{ lookup('env', 'USER') }}"
         groups: docker
-        append: yes
+        append: true
 
     - name: Télécharger le binaire Minikube
       get_url:
