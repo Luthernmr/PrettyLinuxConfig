@@ -3,6 +3,7 @@
 1. Install dependencies
    `sudo apt-get install git ansible`
 
+<<<<<<< HEAD
 2. launch Ansible
    `ansible-playbook -i inventory.ini workstation.yml`
 
@@ -21,3 +22,11 @@
    -  https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
 ### install tweaks and personalize 
 
+=======
+2. Go to a appropriate directory and Iclone the project
+   `git clone https://github.com/Luthernmr/PrettyLinuxConfig.git`
+
+3. launch Ansible
+   `sudo ansible-playbook -i inventory.ini workstation.yml`
+   
+>>>>>>> 39b5572c613153a4734dc54ca9bc701d42c25f18
