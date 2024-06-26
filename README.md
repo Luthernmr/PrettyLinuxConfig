@@ -22,6 +22,7 @@
    -  https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
 ### install tweaks and personalize 
 
+### install hadolint
 =======
 2. Go to a appropriate directory and Iclone the project
    `git clone https://github.com/Luthernmr/PrettyLinuxConfig.git`
