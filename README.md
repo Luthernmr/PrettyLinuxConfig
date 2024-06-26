@@ -23,6 +23,7 @@
 ### install tweaks and personalize 
 
 ### install hadolint
+   - https://github.com/hadolint/hadolint?tab=readme-ov-file#configure
 =======
 2. Go to a appropriate directory and Iclone the project
    `git clone https://github.com/Luthernmr/PrettyLinuxConfig.git`
