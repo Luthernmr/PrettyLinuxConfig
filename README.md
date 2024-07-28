@@ -1,13 +1,9 @@
 # PrettyLinuxConfig
 
-1. Install dependencies
-   `sudo apt-get install git ansible`
-
-2. Clone repo
-   `git clone https://github.com/Luthernmr/PrettyLinuxConfig.git`
-
-3. launch Ansible
-   `ansible-playbook -i inventory.ini workstation.yml`
+1. Installation
+   `sudo apt-get install git ansible
+    git clone https://github.com/Luthernmr/PrettyLinuxConfig.git
+    ansible-playbook -i inventory.ini workstation.yml`
 
 ## TODO
  
